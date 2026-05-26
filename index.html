@@ -282,25 +282,29 @@
             margin-bottom: 1rem;
         }
 
-        .embed-placeholder {
+        .embed-container {
             width: 100%;
-            height: 120px;
-            background: var(--forest);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--cream);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
             margin-bottom: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        .embed-placeholder:hover {
-            background: var(--terracotta);
+        .embed-container iframe {
+            width: 100%;
+            border: none;
+            display: block;
+        }
+
+        .spotify-embed {
+            height: 152px;
+        }
+
+        .youtube-embed {
+            height: 200px;
+        }
+
+        .soundcloud-embed {
+            height: 166px;
         }
 
         .music-card p {
@@ -607,24 +611,24 @@
             <div class="music-card fade-in">
                 <h3>Sunset Ritual</h3>
                 <span class="genre-tag">Deep House</span>
-                <div class="embed-placeholder" onclick="window.open('https://open.spotify.com/track/5sxA3mMW33X6fPGNnzNaGK', '_blank')">
-                    ▶ New Release on Spotify
+                <div class="embed-container">
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5sxA3mMW33X6fPGNnzNaGK?utm_source=generator" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
                 <p>A journey through warm basslines and sunset melodies. Recorded live at The Garden.</p>
             </div>
             <div class="music-card fade-in">
                 <h3>Earth Tones</h3>
                 <span class="genre-tag">Organic House</span>
-                <div class="embed-placeholder" onclick="window.open('https://youtu.be/R6JmnvR8KdA?si=Fte9XlfgDOlEzq3A', '_blank')">
-                    ▶ Watch on YouTube
+                <div class="embed-container">
+                    <iframe class="youtube-embed" src="https://www.youtube.com/embed/R6JmnvR8KdA?si=Fte9XlfgDOlEzq3A" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 <p>Natural textures meet dancefloor energy. Instruments from the soil, beats from the soul.</p>
             </div>
             <div class="music-card fade-in">
                 <h3>Rhythms of the Motherland</h3>
                 <span class="genre-tag">Afro House</span>
-                <div class="embed-placeholder" onclick="window.open('https://on.soundcloud.com/iLZlO4sbEghROyeKVs', '_blank')">
-                    ▶ Play on SoundCloud
+                <div class="embed-container">
+                    <iframe class="soundcloud-embed" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/iLZlO4sbEghROyeKVs&color=%232C3E2D&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
                 </div>
                 <p>Percussive storytelling from the diaspora. Ancestral drums meet modern grooves.</p>
             </div>
