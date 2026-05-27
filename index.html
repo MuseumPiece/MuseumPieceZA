@@ -238,6 +238,128 @@
             margin: 0 auto;
         }
 
+        /* --- About / Gallery Room Section --- */
+        .about-section {
+            background: var(--sand);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: var(--terracotta);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            opacity: 0.06;
+            animation: blob-morph 10s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .about-section::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -80px;
+            width: 350px;
+            height: 350px;
+            background: var(--sage);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            opacity: 0.06;
+            animation: blob-morph 12s ease-in-out infinite reverse;
+            z-index: 0;
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-hero-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--forest);
+            line-height: 1.3;
+        }
+
+        .about-hero-text .line-1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .about-hero-text .line-2 {
+            font-size: clamp(1.3rem, 3vw, 1.9rem);
+            color: var(--terracotta);
+            display: block;
+            margin-bottom: 4rem;
+        }
+
+        .about-divider {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(180deg, transparent, var(--terracotta), transparent);
+            margin: 0 auto 4rem;
+            opacity: 0.5;
+        }
+
+        .about-statement {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--forest);
+            line-height: 1.4;
+            margin-bottom: 4rem;
+        }
+
+        .about-statement em {
+            color: var(--terracotta);
+            font-style: italic;
+        }
+
+        .about-body {
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            color: var(--charcoal);
+            opacity: 0.8;
+            line-height: 2;
+            max-width: 640px;
+            margin: 0 auto 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .about-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-manifesto {
+            margin-top: 2rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(44, 62, 45, 0.12);
+        }
+
+        .about-manifesto p {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: clamp(0.85rem, 1.3vw, 1rem);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--forest);
+            line-height: 2.2;
+        }
+
+        .about-manifesto .manifesto-accent {
+            color: var(--terracotta);
+            letter-spacing: 5px;
+            font-size: clamp(1rem, 1.6vw, 1.2rem);
+        }
+
         .listen-section {
             background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%);
         }
@@ -650,6 +772,7 @@
             <span></span>
         </button>
         <ul class="nav-links">
+            <li><a href="#about" onclick="document.querySelector('.nav-links').classList.remove('active')">About</a></li>
             <li><a href="#listen" onclick="document.querySelector('.nav-links').classList.remove('active')">Listen</a></li>
             <li><a href="#gigs" onclick="document.querySelector('.nav-links').classList.remove('active')">Gigs</a></li>
             <li><a href="#book" onclick="document.querySelector('.nav-links').classList.remove('active')">Book</a></li>
@@ -665,6 +788,29 @@
             <p class="subtitle">Deep House · Organic House · Afro House</p>
             <p class="tagline">"Where earthy rhythms meet soulful frequencies"</p>
             <a href="#listen" class="cta-button">Enter the Sound</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="about-content fade-in">
+            <div class="about-hero-text">
+                <span class="line-1">Walk in quiet. You're in a gallery now.</span>
+                <span class="line-2">Listen like you're staring at art — because you are.</span>
+            </div>
+
+            <div class="about-divider"></div>
+
+            <p class="about-statement">This isn't new. It's <em>remembered</em>.</p>
+
+            <div class="about-body">
+                <p>The noise stays outside. Inside, sound is treated like an artifact — excavated, refined, and placed under light so you can actually see it. Every beat is a piece on the wall. Every set is a room you walk through.</p>
+                <p>You're not just listening. You're standing in front of it.</p>
+            </div>
+
+            <div class="about-manifesto">
+                <p>Ancient in approach. Deliberate in craft.</p>
+                <p class="manifesto-accent">No trends. No noise. Only work made to last.</p>
+            </div>
         </div>
     </section>
 
