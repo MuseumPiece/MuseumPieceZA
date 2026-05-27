@@ -49,11 +49,11 @@
         }
 
         .blob-2 {
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
             background: var(--sage);
-            bottom: 40px;
-            left: -60px;
+            bottom: 100px;
+            left: -80px;
             animation-delay: -2s;
         }
 
@@ -543,18 +543,18 @@
             .nav-links {
                 display: none;
             }
-
+            
             .booking-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-
+            
             .gig-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.5rem;
             }
-
+            
             section {
                 padding: 4rem 1.5rem;
             }
@@ -574,86 +574,16 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Form status message */
-        .form-status {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            text-align: center;
-            display: none;
-        }
-
-        .form-status.success {
-            display: block;
-            background: rgba(139, 157, 119, 0.2);
-            color: var(--forest);
-            border: 1px solid var(--sage);
-        }
-
-        .form-status.error {
-            display: block;
-            background: rgba(196, 112, 90, 0.1);
-            color: var(--terracotta);
-            border: 1px solid var(--terracotta);
-        }
-
-        /* Mobile menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu-btn span {
-            display: block;
-            width: 25px;
-            height: 1px;
-            background: var(--forest);
-            margin: 6px 0;
-            transition: 0.3s;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(245, 240, 232, 0.98);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-        }
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">Museum Piece</div>
-        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('active')">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <ul class="nav-links">
-            <li><a href="#listen" onclick="document.querySelector('.nav-links').classList.remove('active')">Listen</a></li>
-            <li><a href="#gigs" onclick="document.querySelector('.nav-links').classList.remove('active')">Gigs</a></li>
-            <li><a href="#book" onclick="document.querySelector('.nav-links').classList.remove('active')">Book</a></li>
-            <li><a href="#contact" onclick="document.querySelector('.nav-links').classList.remove('active')">Contact</a></li>
+            <li><a href="#listen">Listen</a></li>
+            <li><a href="#gigs">Gigs</a></li>
+            <li><a href="#book">Book</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -693,7 +623,7 @@
             <div class="music-card fade-in">
                 <h3>Forest Whispers</h3>
                 <div class="embed-container">
-                    <iframe class="soundcloud-embed" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/didgethgod-the-beloved-titana/museum-piece-forest-whispers&amp;color=%232C3E2D&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"></iframe>
+                    <iframe class="soundcloud-embed" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/z6Mm7MUkmRDj9rgcru&color=%232C3E2D&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
                 </div>
                 <p class="track-desc">"Forest Whispers" is a hauntingly beautiful instrumental piece that evokes the stillness of a moonlit jungle. Delicate piano and soaring violin melodies weave together to create a sense of peaceful solitude, as a mother bear cradles her young in the heart of the forest. 🌿</p>
                 <p class="track-tags">#Ambient #Cinematic #Instrumental #Piano #Violin #Melancholic</p>
@@ -757,14 +687,14 @@
                         <span class="icon">✉</span>
                         <span>didgethebeloved1@gmail.com</span>
                     </a>
-                    <a href="https://wa.me/27711561271" class="booking-link" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/27711561271" class="booking-link">
                         <span class="icon">📱</span>
                         <span>WhatsApp: +27 71 156 1271</span>
                     </a>
                 </div>
             </div>
             <div class="booking-form fade-in">
-                <form id="bookingForm" action="https://formspree.io/f/xnqevwpa" method="POST">
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-group">
                         <label>Name</label>
                         <input type="text" name="name" required>
@@ -792,7 +722,6 @@
                         <textarea name="message" placeholder="Tell me about your event..."></textarea>
                     </div>
                     <button type="submit" class="submit-btn">Send Request</button>
-                    <div id="formStatus" class="form-status"></div>
                 </form>
             </div>
         </div>
@@ -807,10 +736,10 @@
             For collaborations, remix requests, or just to say hello — reach out. New music and gig updates drop here first.
         </p>
         <div class="social-links">
-            <a href="https://www.instagram.com/museum_piece1?igsh=MWFneGcwZnJ0OHRzZQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" title="Instagram">IG</a>
-            <a href="https://www.youtube.com/@museumpiece1" target="_blank" rel="noopener noreferrer" title="YouTube">YT</a>
-            <a href="https://on.soundcloud.com/iLZlO4sbEghROyeKVs" target="_blank" rel="noopener noreferrer" title="SoundCloud">SC</a>
-            <a href="https://open.spotify.com/user/sfytw4543zum1j11c4dfrkuhr?si=5lCi7tgkToe1NltJnsPSIA" target="_blank" rel="noopener noreferrer" title="Spotify">SP</a>
+            <a href="https://www.instagram.com/museum_piece1?igsh=MWFneGcwZnJ0OHRzZQ%3D%3D&utm_source=qr" target="_blank" title="Instagram">IG</a>
+            <a href="https://www.youtube.com/@museumpiece1" target="_blank" title="YouTube">YT</a>
+            <a href="https://on.soundcloud.com/iLZlO4sbEghROyeKVs" target="_blank" title="SoundCloud">SC</a>
+            <a href="https://open.spotify.com/user/sfytw4543zum1j11c4dfrkuhr?si=5lCi7tgkToe1NltJnsPSIA" target="_blank" title="Spotify">SP</a>
         </div>
     </section>
 
@@ -820,7 +749,6 @@
     </footer>
 
     <script>
-        // Intersection Observer for fade-in animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -836,7 +764,6 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Nav shadow on scroll
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
@@ -846,7 +773,6 @@
             }
         });
 
-        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -854,62 +780,6 @@
                     behavior: 'smooth'
                 });
             });
-        });
-
-        // Form handling with Formspree
-        const form = document.getElementById('bookingForm');
-        const formStatus = document.getElementById('formStatus');
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const submitBtn = form.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    formStatus.className = 'form-status success';
-                    formStatus.textContent = 'Thank you! Your request has been sent. We\'ll be in touch soon.';
-                    form.reset();
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                // Fallback: open email client
-                const formData = new FormData(form);
-                const name = formData.get('name');
-                const email = formData.get('email');
-                const eventType = formData.get('event_type');
-                const date = formData.get('date');
-                const message = formData.get('message');
-
-                const subject = encodeURIComponent(`Booking Request: ${eventType}`);
-                const body = encodeURIComponent(
-                    `Name: ${name}\n` +
-                    `Email: ${email}\n` +
-                    `Event Type: ${eventType}\n` +
-                    `Date: ${date || 'Not specified'}\n\n` +
-                    `Message:\n${message || 'No additional message'}`
-                );
-
-                window.location.href = `mailto:didgethebeloved1@gmail.com?subject=${subject}&body=${body}`;
-
-                formStatus.className = 'form-status success';
-                formStatus.textContent = 'Opening your email client with the booking details...';
-                form.reset();
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
         });
     </script>
 </body>
