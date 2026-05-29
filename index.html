@@ -6,16 +6,20 @@
     <title>Museum Piece — Deep House | Organic House | Afro House</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Josefin+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sand: #E8DCC4;
-            --terracotta: #C4705A;
-            --sage: #8B9D77;
-            --forest: #2C3E2D;
-            --charcoal: #1A1A1A;
-            --cream: #F5F0E8;
-            --ochre: #B8860B;
+            /* The Gallery Palette */
+            --gallery-black: #0C0C0E;
+            --gallery-warm: #141416;
+            --plaster: #EDE8DF;
+            --parchment: #D4CFC5;
+            --umber: #8B5E3C;
+            --terracotta: #B87A5C;
+            --gold: #B8956A;
+            --sage: #6B7B5E;
+            --stone: #9E968A;
+            --charcoal: #2A2A2E;
         }
 
         * {
@@ -24,169 +28,247 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
         body {
             font-family: 'Josefin Sans', sans-serif;
-            background: var(--cream);
-            color: var(--charcoal);
-            line-height: 1.7;
+            background: var(--gallery-black);
+            color: var(--plaster);
+            line-height: 1.8;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .blob {
-            position: absolute;
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            opacity: 0.15;
-            z-index: 0;
-            animation: blob-morph 8s ease-in-out infinite;
-        }
-
-        .blob-1 {
-            width: 400px;
-            height: 400px;
+        ::selection {
             background: var(--terracotta);
-            top: -100px;
-            right: -100px;
+            color: var(--gallery-black);
         }
 
-        .blob-2 {
-            width: 250px;
-            height: 250px;
-            background: var(--sage);
-            bottom: 40px;
-            left: -60px;
-            animation-delay: -2s;
-        }
-
-        .blob-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--ochre);
-            top: 50%;
-            right: 10%;
-            animation-delay: -4s;
-        }
-
-        @keyframes blob-morph {
-            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-        }
-
+        /* ─── Navigation ─── */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 3rem;
+            padding: 2rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(245, 240, 232, 0.85);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            background: linear-gradient(180deg, rgba(12,12,14,0.95) 0%, rgba(12,12,14,0) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(12,12,14,0.92);
+            padding: 1.2rem 4rem;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.04);
         }
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 300;
             font-style: italic;
-            color: var(--forest);
-            letter-spacing: 1px;
+            color: var(--plaster);
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: color 0.4s;
+        }
+
+        .logo:hover {
+            color: var(--gold);
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--forest);
-            font-weight: 400;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            color: var(--stone);
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
             position: relative;
-            transition: color 0.3s;
+            transition: color 0.4s ease;
+            padding-bottom: 4px;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
             width: 0;
             height: 1px;
-            background: var(--terracotta);
-            transition: width 0.3s ease;
+            background: var(--gold);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--plaster);
         }
 
         .nav-links a:hover::after {
             width: 100%;
         }
 
-        .nav-links a:hover {
-            color: var(--terracotta);
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
         }
 
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: var(--plaster);
+            margin: 6px 0;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ─── Hero ─── */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 2rem;
             overflow: hidden;
+            background: var(--gallery-black);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,149,106,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 80% 70%, rgba(184,122,92,0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 50% at 20% 80%, rgba(107,123,94,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+        }
+
+        .hero-frame {
+            position: absolute;
+            inset: 2rem;
+            border: 1px solid rgba(237,232,223,0.06);
+            pointer-events: none;
+            opacity: 0;
+            animation: frameReveal 2s 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes frameReveal {
+            to { opacity: 1; }
         }
 
         .hero-content {
             text-align: center;
             z-index: 1;
-            max-width: 800px;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-tag {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.2s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(4rem, 12vw, 10rem);
             font-weight: 300;
             font-style: italic;
-            color: var(--forest);
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
+            color: var(--plaster);
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1.4s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .hero .subtitle {
-            font-size: 1.1rem;
-            color: var(--terracotta);
-            letter-spacing: 4px;
+            font-size: 0.85rem;
+            font-weight: 200;
+            color: var(--stone);
+            letter-spacing: 6px;
             text-transform: uppercase;
-            margin-bottom: 2rem;
-            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.2s 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .hero .tagline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-style: italic;
-            color: var(--sage);
-            margin-bottom: 3rem;
             font-weight: 300;
+            color: var(--terracotta);
+            margin-bottom: 3.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.2s 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            border: 1px solid var(--forest);
-            color: var(--forest);
+            padding: 1.1rem 3rem;
+            border: 1px solid rgba(237,232,223,0.25);
+            color: var(--plaster);
             text-decoration: none;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            transition: all 0.4s ease;
+            font-size: 0.7rem;
+            font-weight: 300;
+            font-family: 'Josefin Sans', sans-serif;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1.5s 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .cta-button::before {
@@ -196,22 +278,66 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--forest);
-            transition: left 0.4s ease;
+            background: var(--plaster);
+            transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: -1;
         }
 
         .cta-button:hover {
-            color: var(--cream);
-            border-color: var(--forest);
+            color: var(--gallery-black);
+            border-color: var(--plaster);
         }
 
         .cta-button:hover::before {
             left: 0;
         }
 
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeIn 1s 2.5s ease forwards;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--stone);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--stone), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.8; transform: scaleY(1.2); }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ─── Sections ─── */
         section {
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
             position: relative;
             max-width: 1200px;
             margin: 0 auto;
@@ -219,16 +345,17 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .section-header h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 300;
             font-style: italic;
-            color: var(--forest);
-            margin-bottom: 1rem;
+            color: var(--plaster);
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
         }
 
         .section-header .divider {
@@ -236,87 +363,84 @@
             height: 1px;
             background: var(--terracotta);
             margin: 0 auto;
+            opacity: 0.6;
         }
 
-        /* --- About / Gallery Room Section --- */
+        .section-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* ─── About Section ─── */
         .about-section {
-            background: var(--sand);
+            background: var(--gallery-warm);
             position: relative;
-            overflow: hidden;
+            max-width: 100%;
+            padding: 10rem 2rem;
         }
 
         .about-section::before {
             content: '';
             position: absolute;
-            top: -200px;
-            right: -100px;
-            width: 500px;
-            height: 500px;
-            background: var(--terracotta);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            opacity: 0.06;
-            animation: blob-morph 10s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        .about-section::after {
-            content: '';
-            position: absolute;
-            bottom: -150px;
-            left: -80px;
-            width: 350px;
-            height: 350px;
-            background: var(--sage);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            opacity: 0.06;
-            animation: blob-morph 12s ease-in-out infinite reverse;
-            z-index: 0;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(180deg, transparent, var(--terracotta));
+            opacity: 0.4;
         }
 
         .about-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
 
         .about-hero-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 300;
-            color: var(--forest);
-            line-height: 1.3;
+            margin-bottom: 5rem;
         }
 
         .about-hero-text .line-1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--plaster);
             display: block;
-            margin-bottom: 0.3rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
         }
 
         .about-hero-text .line-2 {
-            font-size: clamp(1.3rem, 3vw, 1.9rem);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-style: italic;
+            font-weight: 300;
             color: var(--terracotta);
             display: block;
-            margin-bottom: 4rem;
+            line-height: 1.4;
         }
 
         .about-divider {
             width: 1px;
             height: 80px;
-            background: linear-gradient(180deg, transparent, var(--terracotta), transparent);
+            background: linear-gradient(180deg, var(--terracotta), transparent);
             margin: 0 auto 4rem;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
         .about-statement {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
             font-style: italic;
             font-weight: 300;
-            color: var(--forest);
-            line-height: 1.4;
+            color: var(--plaster);
+            line-height: 1.3;
             margin-bottom: 4rem;
         }
 
@@ -326,77 +450,119 @@
         }
 
         .about-body {
-            font-size: clamp(1rem, 1.5vw, 1.15rem);
-            color: var(--charcoal);
-            opacity: 0.8;
-            line-height: 2;
-            max-width: 640px;
+            font-size: 0.95rem;
+            font-weight: 200;
+            color: var(--stone);
+            line-height: 2.2;
+            max-width: 580px;
             margin: 0 auto 4rem;
-            letter-spacing: 0.5px;
         }
 
         .about-body p {
             margin-bottom: 1.5rem;
         }
 
+        .about-body p:last-child {
+            color: var(--plaster);
+            font-weight: 300;
+        }
+
         .about-manifesto {
-            margin-top: 2rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(44, 62, 45, 0.12);
+            padding-top: 4rem;
+            border-top: 1px solid rgba(237,232,223,0.06);
         }
 
         .about-manifesto p {
-            font-family: 'Josefin Sans', sans-serif;
-            font-size: clamp(0.85rem, 1.3vw, 1rem);
-            letter-spacing: 3px;
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--forest);
-            line-height: 2.2;
+            color: var(--stone);
+            line-height: 2.4;
         }
 
         .about-manifesto .manifesto-accent {
-            color: var(--terracotta);
-            letter-spacing: 5px;
-            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            color: var(--gold);
+            letter-spacing: 6px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
         }
 
+        /* ─── Listen Section ─── */
         .listen-section {
-            background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%);
+            background: var(--gallery-black);
+            position: relative;
+        }
+
+        .listen-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(237,232,223,0.08), transparent);
         }
 
         .music-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .music-card {
-            background: rgba(255,255,255,0.6);
-            padding: 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(139, 157, 119, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--gallery-warm);
+            padding: 2.5rem;
+            border: 1px solid rgba(237,232,223,0.06);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .music-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--terracotta), transparent);
+            opacity: 0;
+            transition: opacity 0.6s ease;
         }
 
         .music-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(44, 62, 45, 0.1);
+            border-color: rgba(237,232,223,0.12);
+            transform: translateY(-4px);
+        }
+
+        .music-card:hover::before {
+            opacity: 0.6;
+        }
+
+        .card-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
         }
 
         .music-card h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-style: italic;
-            color: var(--forest);
-            margin-bottom: 0.5rem;
+            font-weight: 400;
+            color: var(--plaster);
+            margin-bottom: 1.5rem;
         }
 
         .embed-container {
             width: 100%;
-            margin-bottom: 1rem;
-            border-radius: 12px;
+            margin-bottom: 1.5rem;
             overflow: hidden;
+            border: 1px solid rgba(237,232,223,0.06);
         }
 
         .embed-container iframe {
@@ -405,124 +571,156 @@
             display: block;
         }
 
-        .spotify-embed {
-            height: 152px;
-        }
-
-        .youtube-embed {
-            height: 200px;
-        }
-
-        .soundcloud-embed {
-            height: 166px;
-        }
+        .spotify-embed { height: 152px; }
+        .youtube-embed { height: 200px; }
+        .soundcloud-embed { height: 166px; }
 
         .music-card .track-desc {
-            font-size: 0.9rem;
-            color: var(--charcoal);
-            opacity: 0.85;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 200;
+            color: var(--stone);
+            line-height: 1.8;
+            margin-bottom: 1rem;
         }
 
         .music-card .track-tags {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
+            font-weight: 300;
             color: var(--sage);
-            font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
+        /* ─── Gigs Section ─── */
         .gig-section {
-            background: var(--forest);
-            color: var(--cream);
-            position: relative;
-            overflow: hidden;
+            background: var(--gallery-warm);
+            max-width: 100%;
+            padding: 10rem 2rem;
         }
 
         .gig-section .section-header h2 {
-            color: var(--sand);
-        }
-
-        .gig-section .divider {
-            background: var(--terracotta);
+            color: var(--plaster);
         }
 
         .gig-list {
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto;
         }
 
         .gig-item {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
             align-items: center;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid rgba(232, 220, 196, 0.2);
-            transition: padding-left 0.3s;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(237,232,223,0.06);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .gig-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 0;
+            background: var(--terracotta);
+            transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .gig-item:hover {
-            padding-left: 10px;
+            padding-left: 1rem;
+        }
+
+        .gig-item:hover::before {
+            height: 60%;
         }
 
         .gig-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-style: italic;
+            font-weight: 400;
             color: var(--terracotta);
-            min-width: 120px;
         }
 
         .gig-details h4 {
-            font-weight: 400;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            font-family: 'Josefin Sans', sans-serif;
+            font-weight: 300;
+            font-size: 1.05rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--plaster);
             margin-bottom: 0.3rem;
         }
 
         .gig-details span {
-            font-size: 0.85rem;
-            opacity: 0.7;
+            font-size: 0.8rem;
+            font-weight: 200;
+            color: var(--stone);
             letter-spacing: 1px;
         }
 
         .gig-status {
-            padding: 0.4rem 1.2rem;
-            border: 1px solid var(--sage);
-            color: var(--sage);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(184,149,106,0.3);
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-weight: 300;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            background: transparent;
+            font-family: 'Josefin Sans', sans-serif;
         }
 
         .gig-status:hover {
-            background: var(--sage);
-            color: var(--forest);
+            background: var(--gold);
+            color: var(--gallery-black);
+            border-color: var(--gold);
         }
 
+        /* ─── Booking Section ─── */
         .booking-section {
-            background: var(--sand);
+            background: var(--gallery-black);
+            position: relative;
+        }
+
+        .booking-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(237,232,223,0.08), transparent);
         }
 
         .booking-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            gap: 6rem;
+            align-items: start;
         }
 
         .booking-info h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-style: italic;
-            color: var(--forest);
-            margin-bottom: 1.5rem;
+            font-weight: 300;
+            color: var(--plaster);
+            margin-bottom: 2rem;
+            line-height: 1.2;
         }
 
         .booking-info p {
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 0.9rem;
+            font-weight: 200;
+            color: var(--stone);
+            margin-bottom: 3rem;
+            line-height: 2;
         }
 
         .booking-links {
@@ -534,63 +732,73 @@
         .booking-link {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.5rem;
-            background: rgba(255,255,255,0.5);
-            border: 1px solid rgba(44, 62, 45, 0.1);
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            background: transparent;
+            border: 1px solid rgba(237,232,223,0.08);
             text-decoration: none;
-            color: var(--forest);
-            transition: all 0.3s;
+            color: var(--plaster);
+            font-size: 0.85rem;
+            font-weight: 200;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            letter-spacing: 1px;
         }
 
         .booking-link:hover {
-            background: var(--forest);
-            color: var(--cream);
-            transform: translateX(10px);
+            background: var(--gallery-warm);
+            border-color: rgba(237,232,223,0.15);
+            padding-left: 2rem;
         }
 
         .booking-link .icon {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            color: var(--gold);
         }
 
         .booking-form {
-            background: rgba(255,255,255,0.7);
-            padding: 2.5rem;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
+            background: var(--gallery-warm);
+            padding: 3rem;
+            border: 1px solid rgba(237,232,223,0.06);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--forest);
+            color: var(--stone);
+            font-weight: 300;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid rgba(44, 62, 45, 0.2);
-            background: transparent;
+            padding: 1rem;
+            border: 1px solid rgba(237,232,223,0.08);
+            background: var(--gallery-black);
             font-family: 'Josefin Sans', sans-serif;
-            font-size: 1rem;
-            color: var(--charcoal);
-            transition: border-color 0.3s;
+            font-size: 0.9rem;
+            font-weight: 200;
+            color: var(--plaster);
+            transition: all 0.4s ease;
+            outline: none;
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
-            outline: none;
             border-color: var(--terracotta);
+        }
+
+        .form-group select option {
+            background: var(--gallery-black);
+            color: var(--plaster);
         }
 
         .form-group textarea {
@@ -600,148 +808,145 @@
 
         .submit-btn {
             width: 100%;
-            padding: 1rem;
-            background: var(--forest);
-            color: var(--cream);
-            border: none;
+            padding: 1.1rem;
+            background: transparent;
+            color: var(--plaster);
+            border: 1px solid rgba(237,232,223,0.2);
             font-family: 'Josefin Sans', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 4px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .submit-btn:hover {
-            background: var(--terracotta);
+            background: var(--plaster);
+            color: var(--gallery-black);
+            border-color: var(--plaster);
         }
 
+        .form-status {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            font-size: 0.8rem;
+            text-align: center;
+            display: none;
+            font-weight: 200;
+        }
+
+        .form-status.success {
+            display: block;
+            color: var(--sage);
+            border: 1px solid rgba(107,123,94,0.3);
+        }
+
+        .form-status.error {
+            display: block;
+            color: var(--terracotta);
+            border: 1px solid rgba(184,122,92,0.3);
+        }
+
+        /* ─── Contact Section ─── */
         .contact-section {
             text-align: center;
-            padding-bottom: 3rem;
+            padding: 8rem 2rem 4rem;
+            background: var(--gallery-black);
+            position: relative;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(237,232,223,0.08), transparent);
+        }
+
+        .contact-section p {
+            max-width: 480px;
+            margin: 0 auto 3rem;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--stone);
+            line-height: 2;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 2.5rem;
         }
 
         .social-links a {
             width: 50px;
             height: 50px;
-            border: 1px solid var(--forest);
-            border-radius: 50%;
+            border: 1px solid rgba(237,232,223,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: var(--forest);
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            color: var(--stone);
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .social-links a:hover {
-            background: var(--forest);
-            color: var(--cream);
-            transform: rotate(360deg);
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
         }
 
+        /* ─── Footer ─── */
         footer {
             text-align: center;
-            padding: 3rem 2rem;
-            background: var(--forest);
-            color: var(--sand);
+            padding: 4rem 2rem;
+            background: var(--gallery-black);
         }
 
         footer p {
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            opacity: 0.7;
+            font-size: 0.65rem;
+            font-weight: 200;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--charcoal);
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .booking-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .gig-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            section {
-                padding: 4rem 1.5rem;
-            }
+        footer p:first-child {
+            color: var(--stone);
+            margin-bottom: 0.5rem;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .fade-in {
+        /* ─── Scroll Animations ─── */
+        .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .fade-in.visible {
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Form status message */
-        .form-status {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            text-align: center;
-            display: none;
-        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
 
-        .form-status.success {
-            display: block;
-            background: rgba(139, 157, 119, 0.2);
-            color: var(--forest);
-            border: 1px solid var(--sage);
-        }
-
-        .form-status.error {
-            display: block;
-            background: rgba(196, 112, 90, 0.1);
-            color: var(--terracotta);
-            border: 1px solid var(--terracotta);
-        }
-
-        /* Mobile menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu-btn span {
-            display: block;
-            width: 25px;
-            height: 1px;
-            background: var(--forest);
-            margin: 6px 0;
-            transition: 0.3s;
-        }
-
+        /* ─── Responsive ─── */
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            nav.scrolled {
+                padding: 1rem 2rem;
             }
 
             .nav-links {
@@ -750,77 +955,120 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: rgba(245, 240, 232, 0.98);
+                background: rgba(12,12,14,0.98);
                 flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
+                padding: 2.5rem;
+                gap: 2rem;
                 text-align: center;
             }
 
             .nav-links.active {
                 display: flex;
             }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .booking-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .gig-item {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .gig-status {
+                justify-self: start;
+            }
+
+            section, .about-section, .gig-section {
+                padding: 5rem 1.5rem;
+            }
+
+            .hero-frame {
+                inset: 1rem;
+            }
+
+            .booking-form {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">Museum Piece</div>
-        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">Museum Piece</a>
+        <button class="mobile-menu-btn" id="menuBtn" onclick="document.querySelector('.nav-links').classList.toggle('active'); this.classList.toggle('active')">
             <span></span>
             <span></span>
             <span></span>
         </button>
         <ul class="nav-links">
-            <li><a href="#about" onclick="document.querySelector('.nav-links').classList.remove('active')">About</a></li>
-            <li><a href="#listen" onclick="document.querySelector('.nav-links').classList.remove('active')">Listen</a></li>
-            <li><a href="#gigs" onclick="document.querySelector('.nav-links').classList.remove('active')">Gigs</a></li>
-            <li><a href="#book" onclick="document.querySelector('.nav-links').classList.remove('active')">Book</a></li>
-            <li><a href="#contact" onclick="document.querySelector('.nav-links').classList.remove('active')">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#listen">Listen</a></li>
+            <li><a href="#gigs">Gigs</a></li>
+            <li><a href="#book">Book</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
+    <!-- Hero -->
     <section class="hero">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+        <div class="hero-bg"></div>
+        <div class="hero-vignette"></div>
+        <div class="hero-frame"></div>
         <div class="hero-content">
+            <p class="hero-tag">Welcome to the Gallery</p>
             <h1>Museum Piece</h1>
             <p class="subtitle">Deep House · Organic House · Afro House</p>
             <p class="tagline">"Where earthy rhythms meet soulful frequencies"</p>
-            <a href="#listen" class="cta-button">Enter the Sound</a>
+            <a href="#about" class="cta-button">Enter the Gallery</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
+    <!-- About -->
     <section id="about" class="about-section">
-        <div class="about-content fade-in">
-            <div class="about-hero-text">
+        <div class="about-content">
+            <div class="about-hero-text reveal">
                 <span class="line-1">Walk in quiet. You're in a gallery now.</span>
                 <span class="line-2">Listen like you're staring at art — because you are.</span>
             </div>
 
-            <div class="about-divider"></div>
+            <div class="about-divider reveal"></div>
 
-            <p class="about-statement">This isn't new. It's <em>remembered</em>.</p>
+            <p class="about-statement reveal">This isn't new. It's <em>remembered</em>.</p>
 
-            <div class="about-body">
+            <div class="about-body reveal">
                 <p>The noise stays outside. Inside, sound is treated like an artifact — excavated, refined, and placed under light so you can actually see it. Every beat is a piece on the wall. Every set is a room you walk through.</p>
                 <p>You're not just listening. You're standing in front of it.</p>
             </div>
 
-            <div class="about-manifesto">
+            <div class="about-manifesto reveal">
                 <p>Ancient in approach. Deliberate in craft.</p>
                 <p class="manifesto-accent">No trends. No noise. Only work made to last.</p>
             </div>
         </div>
     </section>
 
+    <!-- Listen -->
     <section id="listen" class="listen-section">
-        <div class="section-header">
+        <div class="section-header reveal">
+            <span class="section-number">Exhibit I</span>
             <h2>Listen</h2>
             <div class="divider"></div>
         </div>
         <div class="music-grid">
-            <div class="music-card fade-in">
+            <div class="music-card reveal reveal-delay-1">
+                <span class="card-number">01 — Spotify</span>
                 <h3>Forest Whispers</h3>
                 <div class="embed-container">
                     <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5sxA3mMW33X6fPGNnzNaGK?utm_source=generator" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
@@ -828,7 +1076,8 @@
                 <p class="track-desc">"Forest Whispers" is a hauntingly beautiful instrumental piece that evokes the stillness of a moonlit jungle. Delicate piano and soaring violin melodies weave together to create a sense of peaceful solitude, as a mother bear cradles her young in the heart of the forest. 🌿</p>
                 <p class="track-tags">#Ambient #Cinematic #Instrumental #Piano #Violin #Melancholic</p>
             </div>
-            <div class="music-card fade-in">
+            <div class="music-card reveal reveal-delay-2">
+                <span class="card-number">02 — YouTube</span>
                 <h3>Forest Whispers</h3>
                 <div class="embed-container">
                     <iframe class="youtube-embed" src="https://www.youtube.com/embed/R6JmnvR8KdA?si=Fte9XlfgDOlEzq3A" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -836,7 +1085,8 @@
                 <p class="track-desc">"Forest Whispers" is a hauntingly beautiful instrumental piece that evokes the stillness of a moonlit jungle. Delicate piano and soaring violin melodies weave together to create a sense of peaceful solitude, as a mother bear cradles her young in the heart of the forest. 🌿</p>
                 <p class="track-tags">#Ambient #Cinematic #Instrumental #Piano #Violin #Melancholic</p>
             </div>
-            <div class="music-card fade-in">
+            <div class="music-card reveal reveal-delay-3">
+                <span class="card-number">03 — SoundCloud</span>
                 <h3>Forest Whispers</h3>
                 <div class="embed-container">
                     <iframe class="soundcloud-embed" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/didgethgod-the-beloved-titana/museum-piece-forest-whispers&amp;color=%232C3E2D&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"></iframe>
@@ -847,56 +1097,59 @@
         </div>
     </section>
 
+    <!-- Gigs -->
     <section id="gigs" class="gig-section">
-        <div class="blob blob-3"></div>
-        <div class="section-header">
+        <div class="section-header reveal">
+            <span class="section-number">Exhibit II</span>
             <h2>Gig Guide</h2>
             <div class="divider"></div>
         </div>
         <div class="gig-list">
-            <div class="gig-item fade-in">
+            <div class="gig-item reveal">
                 <div class="gig-date">JUN 15</div>
                 <div class="gig-details">
                     <h4>The Botanical Sessions</h4>
                     <span>Johannesburg, South Africa</span>
                 </div>
-                <span class="gig-status">Tickets</span>
+                <button class="gig-status">Tickets</button>
             </div>
-            <div class="gig-item fade-in">
+            <div class="gig-item reveal reveal-delay-1">
                 <div class="gig-date">JUL 02</div>
                 <div class="gig-details">
                     <h4>Sunset Groove Festival</h4>
                     <span>Cape Town, South Africa</span>
                 </div>
-                <span class="gig-status">Tickets</span>
+                <button class="gig-status">Tickets</button>
             </div>
-            <div class="gig-item fade-in">
+            <div class="gig-item reveal reveal-delay-2">
                 <div class="gig-date">JUL 22</div>
                 <div class="gig-details">
                     <h4>Deep in the Woods</h4>
                     <span>Pretoria, South Africa</span>
                 </div>
-                <span class="gig-status">RSVP</span>
+                <button class="gig-status">RSVP</button>
             </div>
-            <div class="gig-item fade-in">
+            <div class="gig-item reveal reveal-delay-3">
                 <div class="gig-date">AUG 10</div>
                 <div class="gig-details">
                     <h4>Organic Nights</h4>
                     <span>Durban, South Africa</span>
                 </div>
-                <span class="gig-status">Free</span>
+                <button class="gig-status">Free</button>
             </div>
         </div>
     </section>
 
+    <!-- Book -->
     <section id="book" class="booking-section">
-        <div class="section-header">
+        <div class="section-header reveal">
+            <span class="section-number">Exhibit III</span>
             <h2>Book Museum Piece</h2>
             <div class="divider"></div>
         </div>
         <div class="booking-content">
-            <div class="booking-info fade-in">
-                <h3>Bring the Sound to Your Space</h3>
+            <div class="booking-info reveal">
+                <h3>Bring the Sound<br>to Your Space</h3>
                 <p>Available for club nights, festivals, private events, and immersive sonic experiences. From intimate gatherings to main stage energy — let's create something memorable together.</p>
                 <div class="booking-links">
                     <a href="mailto:didgethebeloved1@gmail.com" class="booking-link">
@@ -909,7 +1162,7 @@
                     </a>
                 </div>
             </div>
-            <div class="booking-form fade-in">
+            <div class="booking-form reveal reveal-delay-2">
                 <form id="bookingForm" action="https://formspree.io/f/xnqevwpa" method="POST">
                     <div class="form-group">
                         <label>Name</label>
@@ -944,15 +1197,15 @@
         </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact" class="contact-section">
-        <div class="section-header">
+        <div class="section-header reveal">
+            <span class="section-number">Fin</span>
             <h2>Stay Connected</h2>
             <div class="divider"></div>
         </div>
-        <p style="max-width: 500px; margin: 0 auto; font-size: 1.1rem; color: var(--charcoal); opacity: 0.8;">
-            For collaborations, remix requests, or just to say hello — reach out. New music and gig updates drop here first.
-        </p>
-        <div class="social-links">
+        <p class="reveal">For collaborations, remix requests, or just to say hello — reach out. New music and gig updates drop here first.</p>
+        <div class="social-links reveal reveal-delay-1">
             <a href="https://www.instagram.com/museum_piece1?igsh=MWFneGcwZnJ0OHRzZQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" title="Instagram">IG</a>
             <a href="https://www.youtube.com/@museumpiece1" target="_blank" rel="noopener noreferrer" title="YouTube">YT</a>
             <a href="https://on.soundcloud.com/iLZlO4sbEghROyeKVs" target="_blank" rel="noopener noreferrer" title="SoundCloud">SC</a>
@@ -960,49 +1213,49 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <p>© 2026 Museum Piece. All rights reserved.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.75rem;">Crafted with earth, rhythm, and soul.</p>
+        <p>Crafted with earth, rhythm, and soul.</p>
     </footer>
 
     <script>
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
+        // ─── Scroll Reveal ───
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // Nav shadow on scroll
+        // ─── Nav Scroll Effect ───
+        const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+                navbar.classList.add('scrolled');
             } else {
-                nav.style.boxShadow = 'none';
+                navbar.classList.remove('scrolled');
             }
         });
 
-        // Smooth scroll for anchor links
+        // ─── Smooth Scroll ───
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                // Close mobile menu
+                document.querySelector('.nav-links').classList.remove('active');
+                document.getElementById('menuBtn').classList.remove('active');
             });
         });
 
-        // Form handling with Formspree
+        // ─── Form Handling ───
         const form = document.getElementById('bookingForm');
         const formStatus = document.getElementById('formStatus');
 
@@ -1017,38 +1270,27 @@
                 const response = await fetch(form.action, {
                     method: 'POST',
                     body: new FormData(form),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: { 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
                     formStatus.className = 'form-status success';
-                    formStatus.textContent = 'Thank you! Your request has been sent. We\'ll be in touch soon.';
+                    formStatus.textContent = 'Thank you. Your request has been received. We will be in touch.';
                     form.reset();
                 } else {
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
-                // Fallback: open email client
                 const formData = new FormData(form);
-                const name = formData.get('name');
-                const email = formData.get('email');
-                const eventType = formData.get('event_type');
-                const date = formData.get('date');
-                const message = formData.get('message');
-
-                const subject = encodeURIComponent(`Booking Request: ${eventType}`);
+                const subject = encodeURIComponent(`Booking Request: ${formData.get('event_type')}`);
                 const body = encodeURIComponent(
-                    `Name: ${name}\n` +
-                    `Email: ${email}\n` +
-                    `Event Type: ${eventType}\n` +
-                    `Date: ${date || 'Not specified'}\n\n` +
-                    `Message:\n${message || 'No additional message'}`
+                    `Name: ${formData.get('name')}\n` +
+                    `Email: ${formData.get('email')}\n` +
+                    `Event Type: ${formData.get('event_type')}\n` +
+                    `Date: ${formData.get('date') || 'Not specified'}\n\n` +
+                    `Message:\n${formData.get('message') || 'No additional message'}`
                 );
-
                 window.location.href = `mailto:didgethebeloved1@gmail.com?subject=${subject}&body=${body}`;
-
                 formStatus.className = 'form-status success';
                 formStatus.textContent = 'Opening your email client with the booking details...';
                 form.reset();
