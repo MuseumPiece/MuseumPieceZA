@@ -452,20 +452,90 @@
             color: var(--plaster);
             margin-bottom: 1.5rem;
         }
-        .embed-container {
-            width: 100%;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
+        .audio-player {
+            background: var(--gallery-black);
             border: 1px solid rgba(237,232,223,0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .embed-container iframe {
+        .audio-player:hover {
+            border-color: rgba(237,232,223,0.12);
+        }
+        .player-waveform {
             width: 100%;
-            border: none;
-            display: block;
+            height: 60px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
-        .spotify-embed { height: 152px; }
-        .youtube-embed { height: 200px; }
-        .soundcloud-embed { height: 166px; }
+        .player-waveform:hover {
+            opacity: 1;
+        }
+        .player-waveform svg {
+            width: 100%;
+            height: 100%;
+        }
+        .wave-progress {
+            transition: stroke-dashoffset 2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .audio-player:hover .wave-progress {
+            stroke-dashoffset: 0;
+        }
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(237,232,223,0.15);
+            background: transparent;
+            color: var(--plaster);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            flex-shrink: 0;
+        }
+        .play-btn:hover {
+            background: var(--plaster);
+            color: var(--gallery-black);
+            border-color: var(--plaster);
+        }
+        .play-btn svg {
+            margin-left: 2px;
+        }
+        .track-time {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--stone);
+            font-weight: 300;
+            flex-shrink: 0;
+            min-width: 36px;
+        }
+        .player-progress {
+            flex: 1;
+            height: 2px;
+            background: rgba(237,232,223,0.06);
+            position: relative;
+            cursor: pointer;
+        }
+        .progress-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--terracotta);
+            transition: width 0.3s ease;
+        }
+        .audio-player:hover .progress-bar {
+            width: 8%;
+        }
         .music-card .track-desc {
             font-size: 0.85rem;
             font-weight: 200;
@@ -1070,13 +1140,7 @@
         </ul>
     </nav>
 
-    <!-- 8-Bit Emoji Interactive Map -->
-    <canvas id="emojiMap" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.4;"></canvas>
-    <style>
-        @media (min-width: 769px) {
-            #emojiMap { opacity: 0.5 !important; }
-        }
-    </style>
+
 
     <!-- Hero -->
     <section class="hero">
@@ -1127,8 +1191,23 @@
             <div class="music-card reveal reveal-delay-1">
                 <span class="card-number">01 — Spotify</span>
                 <h3>Forest Whispers</h3>
-                <div class="embed-container">
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5sxA3mMW33X6fPGNnzNaGK?utm_source=generator" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <div class="audio-player" data-platform="spotify" data-url="https://open.spotify.com/track/5sxA3mMW33X6fPGNnzNaGK">
+                    <div class="player-waveform">
+                        <svg viewBox="0 0 400 60" preserveAspectRatio="none">
+                            <path d="M0,30 Q5,15 10,30 Q15,45 20,30 Q25,10 30,30 Q35,50 40,30 Q45,20 50,30 Q55,40 60,30 Q65,15 70,30 Q75,35 80,30 Q85,25 90,30 Q95,45 100,30 Q105,20 110,30 Q115,35 120,30 Q125,15 130,30 Q135,40 140,30 Q145,25 150,30 Q155,50 160,30 Q165,20 170,30 Q175,35 180,30 Q185,15 190,30 Q195,45 200,30 Q205,25 210,30 Q215,40 220,30 Q225,20 230,30 Q235,35 240,30 Q245,15 250,30 Q255,50 260,30 Q265,25 270,30 Q275,40 280,30 Q285,20 290,30 Q295,35 300,30 Q305,15 310,30 Q315,45 320,30 Q325,25 330,30 Q335,40 340,30 Q345,20 350,30 Q355,35 360,30 Q365,15 370,30 Q375,50 380,30 Q385,25 390,30 Q395,40 400,30" stroke="var(--terracotta)" stroke-width="1" fill="none" opacity="0.4"/>
+                            <path class="wave-progress" d="M0,30 Q5,15 10,30 Q15,45 20,30 Q25,10 30,30 Q35,50 40,30 Q45,20 50,30 Q55,40 60,30 Q65,15 70,30 Q75,35 80,30 Q85,25 90,30 Q95,45 100,30 Q105,20 110,30 Q115,35 120,30 Q125,15 130,30 Q135,40 140,30 Q145,25 150,30 Q155,50 160,30 Q165,20 170,30 Q175,35 180,30 Q185,15 190,30 Q195,45 200,30 Q205,25 210,30 Q215,40 220,30 Q225,20 230,30 Q235,35 240,30 Q245,15 250,30 Q255,50 260,30 Q265,25 270,30 Q275,40 280,30 Q285,20 290,30 Q295,35 300,30 Q305,15 310,30 Q315,45 320,30 Q325,25 330,30 Q335,40 340,30 Q345,20 350,30 Q355,35 360,30 Q365,15 370,30 Q375,50 380,30 Q385,25 390,30 Q395,40 400,30" stroke="var(--gold)" stroke-width="1.5" fill="none" stroke-dasharray="800" stroke-dashoffset="800"/>
+                        </svg>
+                    </div>
+                    <div class="player-controls">
+                        <button class="play-btn" onclick="window.open('https://open.spotify.com/track/5sxA3mMW33X6fPGNnzNaGK', '_blank')">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2l10 6-10 6z"/></svg>
+                        </button>
+                        <span class="track-time">3:42</span>
+                        <div class="player-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="track-time">0:00</span>
+                    </div>
                 </div>
                 <p class="track-desc">"Forest Whispers" is a hauntingly beautiful instrumental piece that evokes the stillness of a moonlit jungle. Delicate piano and soaring violin melodies weave together to create a sense of peaceful solitude, as a mother bear cradles her young in the heart of the forest. 🌿</p>
                 <p class="track-tags">#Ambient #Cinematic #Instrumental #Piano #Violin #Melancholic</p>
@@ -1136,8 +1215,23 @@
             <div class="music-card reveal reveal-delay-2">
                 <span class="card-number">02 — YouTube</span>
                 <h3>Aural Alchemy Vol.2</h3>
-                <div class="embed-container">
-                    <iframe class="youtube-embed" src="https://www.youtube.com/embed/eCutfDMYCY0?si=n16q8hnysqMz01nD" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="audio-player" data-platform="youtube" data-url="https://www.youtube.com/watch?v=eCutfDMYCY0">
+                    <div class="player-waveform">
+                        <svg viewBox="0 0 400 60" preserveAspectRatio="none">
+                            <path d="M0,30 Q5,20 10,30 Q15,40 20,30 Q25,15 30,30 Q35,45 40,30 Q45,25 50,30 Q55,35 60,30 Q65,20 70,30 Q75,40 80,30 Q85,15 90,30 Q95,50 100,30 Q105,25 110,30 Q115,35 120,30 Q125,20 130,30 Q135,45 140,30 Q145,15 150,30 Q155,40 160,30 Q165,25 170,30 Q175,35 180,30 Q185,20 190,30 Q195,45 200,30 Q205,15 210,30 Q215,40 220,30 Q225,25 230,30 Q235,35 240,30 Q245,20 250,30 Q255,50 260,30 Q265,25 270,30 Q275,40 280,30 Q285,15 290,30 Q295,45 300,30 Q305,25 310,30 Q315,35 320,30 Q325,20 330,30 Q335,40 340,30 Q345,15 350,30 Q355,50 360,30 Q365,25 370,30 Q375,35 380,30 Q385,20 390,30 Q395,45 400,30" stroke="var(--terracotta)" stroke-width="1" fill="none" opacity="0.4"/>
+                            <path class="wave-progress" d="M0,30 Q5,20 10,30 Q15,40 20,30 Q25,15 30,30 Q35,45 40,30 Q45,25 50,30 Q55,35 60,30 Q65,20 70,30 Q75,40 80,30 Q85,15 90,30 Q95,50 100,30 Q105,25 110,30 Q115,35 120,30 Q125,20 130,30 Q135,45 140,30 Q145,15 150,30 Q155,40 160,30 Q165,25 170,30 Q175,35 180,30 Q185,20 190,30 Q195,45 200,30 Q205,15 210,30 Q215,40 220,30 Q225,25 230,30 Q235,35 240,30 Q245,20 250,30 Q255,50 260,30 Q265,25 270,30 Q275,40 280,30 Q285,15 290,30 Q295,45 300,30 Q305,25 310,30 Q315,35 320,30 Q325,20 330,30 Q335,40 340,30 Q345,15 350,30 Q355,50 360,30 Q365,25 370,30 Q375,35 380,30 Q385,20 390,30 Q395,45 400,30" stroke="var(--gold)" stroke-width="1.5" fill="none" stroke-dasharray="800" stroke-dashoffset="800"/>
+                        </svg>
+                    </div>
+                    <div class="player-controls">
+                        <button class="play-btn" onclick="window.open('https://www.youtube.com/watch?v=eCutfDMYCY0', '_blank')">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2l10 6-10 6z"/></svg>
+                        </button>
+                        <span class="track-time">1:12:34</span>
+                        <div class="player-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="track-time">0:00</span>
+                    </div>
                 </div>
                 <p class="track-desc">A giant bear hug for whoever out there needs one today! (Me)</p>
                 <p class="track-tags">Deep House / Organic House / Afro Tech House</p>
@@ -1145,8 +1239,23 @@
             <div class="music-card reveal reveal-delay-3">
                 <span class="card-number">03 — SoundCloud</span>
                 <h3>Forest Whispers</h3>
-                <div class="embed-container">
-                    <iframe class="soundcloud-embed" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/didgethgod-the-beloved-titana/museum-piece-forest-whispers&amp;color=%232C3E2D&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"></iframe>
+                <div class="audio-player" data-platform="soundcloud" data-url="https://soundcloud.com/didgethgod-the-beloved-titana/museum-piece-forest-whispers">
+                    <div class="player-waveform">
+                        <svg viewBox="0 0 400 60" preserveAspectRatio="none">
+                            <path d="M0,30 Q5,10 10,30 Q15,50 20,30 Q25,20 30,30 Q35,40 40,30 Q45,15 50,30 Q55,45 60,30 Q65,25 70,30 Q75,35 80,30 Q85,20 90,30 Q95,45 100,30 Q105,15 110,30 Q115,40 120,30 Q125,25 130,30 Q135,35 140,30 Q145,20 150,30 Q155,50 160,30 Q165,25 170,30 Q175,40 180,30 Q185,15 190,30 Q195,45 200,30 Q205,20 210,30 Q215,35 220,30 Q225,25 230,30 Q235,40 240,30 Q245,15 250,30 Q255,50 260,30 Q265,20 270,30 Q275,35 280,30 Q285,25 290,30 Q295,40 300,30 Q305,15 310,30 Q315,45 320,30 Q325,20 330,30 Q335,35 340,30 Q345,25 350,30 Q355,40 360,30 Q365,15 370,30 Q375,50 380,30 Q385,20 390,30 Q395,35 400,30" stroke="var(--terracotta)" stroke-width="1" fill="none" opacity="0.4"/>
+                            <path class="wave-progress" d="M0,30 Q5,10 10,30 Q15,50 20,30 Q25,20 30,30 Q35,40 40,30 Q45,15 50,30 Q55,45 60,30 Q65,25 70,30 Q75,35 80,30 Q85,20 90,30 Q95,45 100,30 Q105,15 110,30 Q115,40 120,30 Q125,25 130,30 Q135,35 140,30 Q145,20 150,30 Q155,50 160,30 Q165,25 170,30 Q175,40 180,30 Q185,15 190,30 Q195,45 200,30 Q205,20 210,30 Q215,35 220,30 Q225,25 230,30 Q235,40 240,30 Q245,15 250,30 Q255,50 260,30 Q265,20 270,30 Q275,35 280,30 Q285,25 290,30 Q295,40 300,30 Q305,15 310,30 Q315,45 320,30 Q325,20 330,30 Q335,35 340,30 Q345,25 350,30 Q355,40 360,30 Q365,15 370,30 Q375,50 380,30 Q385,20 390,30 Q395,35 400,30" stroke="var(--gold)" stroke-width="1.5" fill="none" stroke-dasharray="800" stroke-dashoffset="800"/>
+                        </svg>
+                    </div>
+                    <div class="player-controls">
+                        <button class="play-btn" onclick="window.open('https://soundcloud.com/didgethgod-the-beloved-titana/museum-piece-forest-whispers', '_blank')">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2l10 6-10 6z"/></svg>
+                        </button>
+                        <span class="track-time">4:18</span>
+                        <div class="player-progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="track-time">0:00</span>
+                    </div>
                 </div>
                 <p class="track-desc">"Forest Whispers" is a hauntingly beautiful instrumental piece that evokes the stillness of a moonlit jungle. Delicate piano and soaring violin melodies weave together to create a sense of peaceful solitude, as a mother bear cradles her young in the heart of the forest. 🌿</p>
                 <p class="track-tags">#Ambient #Cinematic #Instrumental #Piano #Violin #Melancholic</p>
@@ -1569,138 +1678,8 @@ ${formData.get('message') || 'No additional message'}`
         });
 
         initGallery();
-
-        // 8-Bit Emoji Interactive Map
-        const canvas = document.getElementById('emojiMap');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        // 8-bit emoji sprites (music themed)
-        const emojis = ['🎵', '🎶', '🎧', '💿', '🎚️', '🎛️', '🎙️', '📻', '🔊', '🔉'];
-
-        class PixelEmoji {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 24 + 16; // 8-24px
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
-                this.opacity = Math.random() * 0.6 + 0.4;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotSpeed = (Math.random() - 0.5) * 0.02;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.rotation += this.rotSpeed;
-
-                // Wrap around screen
-                if (this.x < -50) this.x = width + 50;
-                if (this.x > width + 50) this.x = -50;
-                if (this.y < -50) this.y = height + 50;
-                if (this.y > height + 50) this.y = -50;
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
-                // Pixelated font
-                ctx.font = `${this.size}px monospace`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(this.emoji, 0, 0);
-                ctx.restore();
-            }
-        }
-
-        // Logo floater
-        class LogoFloater {
-            constructor() {
-                this.x = width / 2;
-                this.y = height / 2;
-                this.size = 40;
-                this.speedX = 0.15;
-                this.speedY = 0.1;
-                this.opacity = 1.0;
-                this.img = new Image();
-                this.img.src = 'logo-8bit-dark-64.png';
-                this.loaded = false;
-                this.img.onload = () => this.loaded = true;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Gentle bounce
-                if (this.x < 100 || this.x > width - 100) this.speedX *= -1;
-                if (this.y < 100 || this.y > height - 100) this.speedY *= -1;
-            }
-            draw() {
-                if (!this.loaded) return;
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.drawImage(this.img, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
-                ctx.restore();
-            }
-        }
-
-        // Create particles
-        const particles = [];
-        for (let i = 0; i < 25; i++) {
-            particles.push(new PixelEmoji());
-        }
-
-        const logoFloat = new LogoFloater();
-
-        // Mouse interaction
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        // Animation loop
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            // Draw particles
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            // Draw logo
-            logoFloat.update();
-            logoFloat.draw();
-
-            // Mouse trail effect (occasional burst)
-            if (Math.random() < 0.02) {
-                const burst = new PixelEmoji();
-                burst.x = mouseX;
-                burst.y = mouseY;
-                burst.size = 20;
-                burst.speedX = (Math.random() - 0.5) * 2;
-                burst.speedY = (Math.random() - 0.5) * 2;
-                burst.opacity = 0.6;
-                particles.push(burst);
-                if (particles.length > 40) particles.shift();
-            }
-
-            requestAnimationFrame(animate);
-        }
-        animate();
     </script>
+
+
 </body>
 </html>
